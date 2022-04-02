@@ -21,7 +21,7 @@ libft/libft.a:
 	$(MAKE) bonus -C libft/ libft.a
 
 mlx_linux/libmlx_Linux.a:
-	$(MAKE) -C mlx_linux/ libmlx_Linux.a
+	$(MAKE) -C mlx_linux/
 
 $(NAME): $(OBJS) libft/libft.a mlx_linux/libmlx_Linux.a
 	cc $(CFLAGS) $(INCS) $^ -o $@ $(LIBS)
