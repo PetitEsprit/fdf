@@ -1,4 +1,4 @@
-_SRCS = main.c 
+_SRCS = main.c load.c init.c utils.c 
 _BONUS = 
 
 SRCS = $(patsubst %.c, src/%.c, $(_SRCS))
@@ -33,7 +33,7 @@ bin/%.o: src/%.c
 	cc $(CFLAGS) $(INCS) -c $< -o $@
 
 check-norme:
-	norminette
+	norminette src inc libft
 
 clean:
 	rm -f ${OBJS} ${OBJS_BONUS}
