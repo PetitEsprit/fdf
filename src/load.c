@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:12:53 by user              #+#    #+#             */
-/*   Updated: 2022/04/11 16:15:52 by user             ###   ########.fr       */
+/*   Updated: 2022/04/13 17:49:36 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include "libft.h"
+#include "init.h"
 #include "type.h"
 
 static void	free_word_tab(void *data)
@@ -109,10 +110,10 @@ void	cart_to_iso(t_point **tab, int *cols, int *rows)
 		i = 0;
 		while(i < *cols)
 		{
-			//x = OFFSET + (i + j) * SCALE; 
-			//y = OFFSET + (j - i / 2.0) * SCALE + tab[j][i].x * SCALE/10;
-			x = (i + j); 
-			y = (j - i / 2.0);
+			x = OFFSET + (i + j) * SCALE; 
+			y = OFFSET + (j - i / 2.0) * SCALE + tab[j][i].x * SCALE/10;
+			//x = (i + j); 
+			//y = (j - i / 2.0);
 			tab[j][i].x = x;
 			tab[j][i].y = y;
 			++i;
@@ -121,22 +122,32 @@ void	cart_to_iso(t_point **tab, int *cols, int *rows)
 	}
 }
 
-t_point	**load_file(char *filename, int *w, int *h)
+int	load_file(t_data *data, char *filename)
 {
 	t_list	*l;
 	char	**tmp;
 	t_point	**tab;
+	int		w;
+	int		h;
 
 	l = file_to_lst(filename);
 	if (!l)
-		return (NULL);
-	*h = ft_lstsize(l);
-	*w = 0;
+		return (-1);
+	h = ft_lstsize(l);
+	w = 0;
 	tmp = ((char **)l->content);
-	while (tmp[*w])
-		++(*w);
-	tab = list_to_tab(l, *w, *h);
-	cart_to_iso(tab, w, h);
-	ft_lstclear(&l, free_word_tab);
-	return (tab);
+	while (tmp[w])
+		++(w);
+	tab = list_to_tab(l, w, h);
+	if (tab)
+	{
+		cart_to_iso(tab, &w, &h);
+		data->map = tab;
+		data->cols = w;
+		data->rows = h;
+		/*TO DO: mettre des valeurs qui s'adapte aux dimensions de la map*/
+		init_data(data, 1280, 720, filename);
+	}
+	ft_lstclear(&l, free_word_tab);	
+	return (0);
 }

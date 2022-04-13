@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 05:41:57 by user              #+#    #+#             */
-/*   Updated: 2022/04/11 16:17:02 by user             ###   ########.fr       */
+/*   Updated: 2022/04/13 17:47:59 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,27 +56,22 @@ void	draw_landscape(t_data *data, t_point **map, int w, int h)
 	}
 }
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	t_point	**tab;
-	int	w;
-	int h;
-
-	tab = load_file("42.fdf", &w, &h);
-
-	printf("WIDTH :%d / HEIGHT: %d\n", w, h);
-	for(int j = 0; j < h; j++)
-	{
-		for(int i = 0; i < w; i++)
-			printf("(%d %d) ", tab[j][i].x, tab[j][i].y);
-		printf("\n");
-	}
-
 	t_data	data;
 
-	init_data(&data, 1280, 720, "Hello World !");
-	draw_landscape(&data, tab, w, h);
+	if (ac < 2)
+		return (-1);
+	load_file(&data, av[1]);
 
+	printf("WIDTH :%d / HEIGHT: %d\n", data.cols, data.rows);
+	for(int j = 0; j < data.rows; j++)
+	{
+		for(int i = 0; i < data.cols; i++)
+			printf("(%d %d) ", data.map[j][i].x, data.map[j][i].y);
+		printf("\n");
+	}
+	draw_landscape(&data, data.map, data.cols, data.rows);
 	mlx_put_image_to_window(data.mlx, data.win, data.frame.img, 0, 0);
 	mlx_loop_hook(data.mlx, render, &data);
 	mlx_hook(data.win, KeyPress, KeyPressMask, key_event, &data);

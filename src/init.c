@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 19:19:24 by user              #+#    #+#             */
-/*   Updated: 2022/04/09 20:26:49 by user             ###   ########.fr       */
+/*   Updated: 2022/04/13 17:04:27 by mdankou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	init_data(t_data *data, int width, int height, char *title)
 {
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, width, height, title);
+	data->offset = 40;
 	data->frame.width = width;
 	data->frame.height = height;
 	data->frame.img = mlx_new_image(data->mlx, width, height);
