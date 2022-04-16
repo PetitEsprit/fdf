@@ -1,43 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   type.h                                             :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 19:06:58 by user              #+#    #+#             */
-/*   Updated: 2022/04/16 20:07:43 by user             ###   ########.fr       */
+/*   Created: 2022/04/15 19:41:51 by user              #+#    #+#             */
+/*   Updated: 2022/04/15 19:44:56 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TYPE_H
-# define TYPE_H
+#ifndef RENDER_H
+# define RENDER_H
 
-typedef struct s_img {
-	void	*img;
-	char	*buff;
-	int		width;
-	int		height;
-	int		bpp;
-	int		line_len;
-	int		endian;
-}	t_img;
-
-typedef struct s_point {
-	int	x;
-	int	y;
-	int	z;
-}	t_point;
-
-typedef struct s_data {
-	void	*mlx;
-	void	*win;
-	t_img	frame;
-	t_point	**map;
-	int		cols;
-	int		rows;
-	int		scale;
-	t_point	offset;
-}	t_data;
+void	render_line(t_img *frame, t_point p1, t_point p2, int color);
+void	draw_landscape(t_data *data, t_point **map, int w, int h);
+int		render(t_data *data);
 
 #endif

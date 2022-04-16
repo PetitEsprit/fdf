@@ -1,4 +1,4 @@
-_SRCS = main.c load.c init.c utils.c 
+_SRCS = main.c load.c init.c utils.c render.c 
 _BONUS = 
 
 SRCS = $(patsubst %.c, src/%.c, $(_SRCS))

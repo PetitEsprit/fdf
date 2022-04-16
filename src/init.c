@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 19:19:24 by user              #+#    #+#             */
-/*   Updated: 2022/04/13 17:04:27 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/04/16 21:48:51 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ int	init_data(t_data *data, int width, int height, char *title)
 {
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, width, height, title);
-	data->offset = 40;
+	data->offset.x = width / 2;
+	data->offset.y = height / 2;
+	data->scale = 10;
 	data->frame.width = width;
 	data->frame.height = height;
 	data->frame.img = mlx_new_image(data->mlx, width, height);
@@ -28,7 +30,7 @@ int	init_data(t_data *data, int width, int height, char *title)
 			&data->frame.line_len, &data->frame.endian);
 	if (!data->mlx || !data->win || !data->frame.img || !data->frame.buff)
 	{
-		free_window(data);
+		free_data(data);
 		free(data->win);
 		write(1, "Initialisation error", 20);
 		return (-1);
@@ -36,8 +38,16 @@ int	init_data(t_data *data, int width, int height, char *title)
 	return (0);
 }
 
-void	free_window(t_data *data)
+void	free_data(t_data *data)
 {
+	int	j;
+
 	mlx_destroy_image(data->mlx, data->frame.img);
 	mlx_destroy_window(data->mlx, data->win);
+	j = 0;
+	while (j < data->rows)
+		free(data->map[j++]);
+	free(data->map);
+	data->win = NULL;
+	data->frame.img = NULL;
 }

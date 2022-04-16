@@ -6,15 +6,15 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 19:39:24 by user              #+#    #+#             */
-/*   Updated: 2022/04/13 17:17:51 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/04/16 20:09:51 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LOAD_H
 # define LOAD_H
 
-#include "type.h"
+# include "type.h"
 
-int	load_file(t_data *data ,char *filename);
+int	load_file(t_data *data, char *filename);
 
 #endif

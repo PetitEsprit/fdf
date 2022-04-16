@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:12:53 by user              #+#    #+#             */
-/*   Updated: 2022/04/13 17:49:36 by mdankou          ###   ########.fr       */
+/*   Updated: 2022/04/16 22:02:28 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	free_word_tab(void *data)
 		return ;
 	while (tab[j])
 	{
-		free(tab[++j]);
+		free(tab[j++]);
 	}
 	free(tab);
 }
@@ -71,7 +71,7 @@ static t_point	**list_to_tab(t_list *l, int width, int height)
 
 	curr = l;
 	j = 0;
-	tab = (t_point**)malloc(sizeof(t_point*) * height);
+	tab = (t_point **)malloc(sizeof(t_point *) * height);
 	while (tab && j < height)
 	{
 		tab[j] = (t_point *)malloc(sizeof(t_point) * width);
@@ -84,38 +84,31 @@ static t_point	**list_to_tab(t_list *l, int width, int height)
 		}
 		i = -1;
 		while (((char **)curr->content)[++i])
-			tab[j][i].x = ft_atoi(((char **)curr->content)[i]);
+			tab[j][i].z = ft_atoi(((char **)curr->content)[i]);
 		curr = curr->next;
 		++j;
 	}
 	return (tab);
 }
 
-void	cart_to_iso(t_point **tab, int *cols, int *rows)
+void	cart_to_iso(t_data *data)
 {
 	int	j;
 	int	i;
-	int x;
-	int y;
-	int SCALE;
-	int OFFSET;
+	int	x;
+	int	y;
 
-	OFFSET = 400;
-	SCALE = 10;
-	(void) SCALE;
-	(void) OFFSET;
 	j = 0;
-	while(j < *rows)
+	while (j < data->rows)
 	{
 		i = 0;
-		while(i < *cols)
+		while (i < data->cols)
 		{
-			x = OFFSET + (i + j) * SCALE; 
-			y = OFFSET + (j - i / 2.0) * SCALE + tab[j][i].x * SCALE/10;
-			//x = (i + j); 
-			//y = (j - i / 2.0);
-			tab[j][i].x = x;
-			tab[j][i].y = y;
+			x = data->offset.x + (i - j) * data->scale;
+			y = data->offset.y + (j + i) / 2.0 * data->scale
+				+ data->map[j][i].z * -data->scale / 5;
+			data->map[j][i].x = x;
+			data->map[j][i].y = y;
 			++i;
 		}
 		++j;
@@ -141,13 +134,12 @@ int	load_file(t_data *data, char *filename)
 	tab = list_to_tab(l, w, h);
 	if (tab)
 	{
-		cart_to_iso(tab, &w, &h);
 		data->map = tab;
 		data->cols = w;
 		data->rows = h;
-		/*TO DO: mettre des valeurs qui s'adapte aux dimensions de la map*/
 		init_data(data, 1280, 720, filename);
+		cart_to_iso(data);
 	}
-	ft_lstclear(&l, free_word_tab);	
+	ft_lstclear(&l, free_word_tab);
 	return (0);
 }
