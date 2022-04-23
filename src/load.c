@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:12:53 by user              #+#    #+#             */
-/*   Updated: 2022/04/16 22:02:28 by user             ###   ########.fr       */
+/*   Updated: 2022/04/23 13:51:01 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ static t_point	**list_to_tab(t_list *l, int width, int height)
 	tab = (t_point **)malloc(sizeof(t_point *) * height);
 	while (tab && j < height)
 	{
-		tab[j] = (t_point *)malloc(sizeof(t_point) * width);
+		tab[j] = (t_point *)malloc(sizeof(t_point) * (width + 1));
 		if (!tab[j])
 		{
-			while (j >= 0)
-				free(tab[j--]);
+			while (--j >= 0)
+				free(tab[j]);
 			free(tab);
 			return (NULL);
 		}

@@ -13,7 +13,7 @@ LIBS = -L./libft -lft -L./mlx_linux -lmlx_Linux -lXext -lX11 -lz -lm
 NAME = bin/fdf
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 
 all: $(NAME)
 
@@ -32,7 +32,7 @@ bin/%.o: src/%.c
 	mkdir -p bin
 	cc $(CFLAGS) $(INCS) -c $< -o $@
 
-check-norme:
+check_norm:
 	norminette src inc libft
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 19:38:30 by user              #+#    #+#             */
-/*   Updated: 2022/04/16 21:07:56 by user             ###   ########.fr       */
+/*   Updated: 2022/04/23 13:55:33 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,15 @@ void	draw_landscape(t_data *data, t_point **map, int w, int h)
 
 int	render(t_data *data)
 {
-	(void) data;
-	
 	if (!data->win)
 		return (0);
 	clear_image(&data->frame);
 	draw_landscape(data, data->map, data->cols, data->rows);
 	mlx_put_image_to_window(data->mlx, data->win, data->frame.img, 0, 0);
 	mlx_string_put(data->mlx, data->win, 130, 100, 0xFF00, "CONTROL");
-	mlx_string_put(data->mlx, data->win, 100, 115, 0xFF00, "ZOOM in/out: p / m");
-	mlx_string_put(data->mlx, data->win, 100, 130, 0xFF00, "Move left/right: left / right");
+	mlx_string_put(data->mlx, data->win, 100, 115, 0xFF00,
+		"ZOOM in/out: p / m");
+	mlx_string_put(data->mlx, data->win, 100, 130, 0xFF00,
+		"Move left/right: left / right");
 	return (0);
 }
