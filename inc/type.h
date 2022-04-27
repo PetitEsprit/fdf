@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 19:06:58 by user              #+#    #+#             */
-/*   Updated: 2022/04/16 20:07:43 by user             ###   ########.fr       */
+/*   Updated: 2022/04/27 20:24:07 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef struct s_data {
 	t_point	**map;
 	int		cols;
 	int		rows;
-	int		scale;
+	float	scale;
 	t_point	offset;
 }	t_data;
 

@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 19:13:07 by user              #+#    #+#             */
-/*   Updated: 2022/04/23 13:42:19 by user             ###   ########.fr       */
+/*   Updated: 2022/04/27 20:28:55 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -21,10 +21,10 @@ void	cart_to_iso(t_data *data);
 
 void	zoom(t_data *data, float factor)
 {
-	int	scale;
+	float	scale;
 
 	scale = data->scale * factor;
-	if (scale <= 1)
+	if (scale <= 0)
 		return ;
 	data->scale = scale;
 	cart_to_iso(data);
