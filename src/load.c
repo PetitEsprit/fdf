@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:12:53 by user              #+#    #+#             */
-/*   Updated: 2022/04/23 13:51:01 by user             ###   ########.fr       */
+/*   Updated: 2022/04/27 19:26:19 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	cart_to_iso(t_data *data)
 		{
 			x = data->offset.x + (i - j) * data->scale;
 			y = data->offset.y + (j + i) / 2.0 * data->scale
-				+ data->map[j][i].z * -data->scale / 5;
+				+ data->map[j][i].z * -data->scale / 2;
 			data->map[j][i].x = x;
 			data->map[j][i].y = y;
 			++i;

@@ -6,7 +6,7 @@
 /*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 05:41:57 by user              #+#    #+#             */
-/*   Updated: 2022/04/23 13:38:07 by user             ###   ########.fr       */
+/*   Updated: 2022/04/27 19:27:10 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,8 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	(void) data;
 	if (ac < 2 || load_file(&data, av[1]) < 0)
 		return (-1);
-	// A enveler ou à remplacer par le ft_printf
-	/*printf("WIDTH :%d / HEIGHT: %d\n", data.cols, data.rows);
-	for(int j = 0; j < data.rows; j++)
-	{
-		for(int i = 0; i < data.cols; i++)
-			printf("(%d %d) ", data.map[j][i].x, data.map[j][i].y);
-		printf("\n");
-	}*/
-	
 	mlx_loop_hook(data.mlx, render, &data);
 	mlx_hook(data.win, KeyPress, KeyPressMask, key_event, &data);
 	mlx_hook(data.win, DestroyNotify, KeyPressMask, mouse_event, &data);
